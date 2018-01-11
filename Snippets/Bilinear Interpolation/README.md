@@ -7,15 +7,15 @@ This snippet provides a method for getting a point inside an irregular quadrilat
 
 //declare quad: points oriented clockwise from top left
 
+```C++
+vector<vec2> myQuad;
+myQuad.push_back( vec2(   0,   0) );
+myQuad.push_back( vec2( 100,   0) );
+myQuad.push_back( vec2( 100, 100) );
+myQuad.push_back( vec2(   0, 100) );
 
-> vector<vec2> myQuad;
-> myQuad.push_back( vec2(   0,   0) );
-> myQuad.push_back( vec2( 100,   0) );
-> myQuad.push_back( vec2( 100, 100) );
-> myQuad.push_back( vec2(   0, 100) );
-> 
-> cout << mapNormToQuad( vec2( 0.5f, 0.5f), quad ) << endl;
-
+cout << mapNormToQuad( vec2( 0.5f, 0.5f), quad ) << endl;
+```
 
 Output:
 > [  50, 50 ]
