@@ -1,0 +1,55 @@
+# Bilinear Interpolation
+
+This snippet provides a method for getting a point inside an irregular quadrilateral from normalized coordinates. This snippet was useful in converting blob tracking data from one coordinate system to another.
+
+
+
+### In header:
+
+ci::vec2 mapNormToQuad(const ci::vec2 p, const std::vector<ci::vec2> &quad, bool clamp = true);
+
+### In cpp:
+
+vec2 PeopleMapper::mapNormToQuad(vec2 p, const vector<vec2> &quad, bool clamp) {
+
+	/*
+		Orientation of points inside quad:
+	         x
+	   0     :     1
+		|    :    |
+		|____.____|....y
+		|         |
+		|         |
+	   3           2
+	*/
+
+	if( quad.size() < 4 ) return;
+
+	//First find the coords of the left and right end points
+	vec2 mid0to3 = lerp( quad[0], quad[3], p.y );
+	vec2 mid1to2 = lerp( quad[1], quad[2], p.y );
+
+	vec2 output;
+	output = lerp(mid0to3, mid1to2, p.x);
+
+	if( clamp ) output = clamp(output, vec2(0.0f, 0.0f), vec2(1.0f, 1.0f));
+
+	return output;
+
+}
+
+
+
+## Use Case:
+
+//declare quad: points oriented clockwise from top left
+vector<vec2> myQuad;
+myQuad.push_back( vec2(   0,   0) );
+myQuad.push_back( vec2( 100,   0) );
+myQuad.push_back( vec2( 100, 100) );
+myQuad.push_back( vec2(   0, 100) );
+
+cout << mapNormToQuad( vec2( 0.5f, 0.5f), quad ) << endl;
+
+Output:
+> [  50, 50 ]
