@@ -11,8 +11,6 @@
 #include "BaseView.h"
 #include "TextView.h"
 
-namespace ivc {
-
 //TextView extended class to hold positions of where
 //the text displays, where it comes from and where it goes
 typedef std::shared_ptr<class TextViewExt> TextViewExtRef;
@@ -36,5 +34,3 @@ public:
 	}
 
 };
-
-}
