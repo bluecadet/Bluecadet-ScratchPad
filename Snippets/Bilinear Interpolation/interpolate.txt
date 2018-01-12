@@ -2,13 +2,13 @@
 In header:
 --------------
 
-ci::vec2 mapNormToQuad(const ci::vec2 p, const std::vector<ci::vec2> &quad, bool clamp = true);
+ci::vec2 mapNormToQuad(const ci::vec2 p, const std::vector<ci::vec2> &quad, bool bClamp = false);
 
 
 In cpp:
 --------------
 
-vec2 PeopleMapper::mapNormToQuad(vec2 p, const vector<vec2> &quad, bool clamp) {
+vec2 PeopleMapper::mapNormToQuad(vec2 p, const vector<vec2> &quad, bool bClamp) {
 
 	/*
 		Orientation of points inside quad:
@@ -21,16 +21,15 @@ vec2 PeopleMapper::mapNormToQuad(vec2 p, const vector<vec2> &quad, bool clamp) {
 	   3           2
 	*/
 
-	if( quad.size() < 4 ) return;
+	if( quad.size() < 4 ) return vec2(-1, -1);
 
 	//First find the coords of the left and right end points
 	vec2 mid0to3 = lerp( quad[0], quad[3], p.y );
 	vec2 mid1to2 = lerp( quad[1], quad[2], p.y );
 
-	vec2 output;
-	output = lerp(mid0to3, mid1to2, p.x);
+	vec2 output = lerp(mid0to3, mid1to2, p.x);
 
-	if( clamp ) output = clamp(output, vec2(0.0f, 0.0f), vec2(1.0f, 1.0f));
+	if( bClamp ) output = clamp(output, vec2(0.0f, 0.0f), vec2(1.0f, 1.0f));
 
 	return output;
 }
