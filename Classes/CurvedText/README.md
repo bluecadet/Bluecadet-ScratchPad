@@ -20,8 +20,8 @@ CurvedTextViewRef mCurvedText;
 ```C++
 
 	//setup/initialize object by passing the text, styles, radius, and parse boolean value to the setup function
-	mTagline = make_shared<CurvedTextView>();
-	mTagline->setup("text", "[style]", (mImage->getWidth()/2), true);
-	addChild(mTagline);
+	mCurvedText = make_shared<CurvedTextView>();
+	mCurvedText->setup("text", "[style]", 200, true);
+	addChild(mCurvedText);
 
 ```
